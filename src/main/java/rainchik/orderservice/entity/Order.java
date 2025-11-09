@@ -21,7 +21,7 @@ public class Order {
     private Long id;
 
     @Column(name = "user_id")
-    private Long user;
+    private Long userId;
 
     @Column(name = "status", length = 50)
     private String status;

@@ -1,4 +1,7 @@
 package rainchik.orderservice.repository;
 
-public interface ItemRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import rainchik.orderservice.entity.Item;
+
+public interface ItemRepository extends JpaRepository<Item, Long> {
 }
