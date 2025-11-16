@@ -14,8 +14,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 //я хочу попрактиковаться в написании запросов, поэтому буду все писать вручную)
 
     @Modifying
-    @Query(value = "INSERT INTO orders (user_id, status) " +
-            "VALUES (:#{order.userId}, :#{order.status})", nativeQuery = true)
+    @Query(value = "INSERT INTO orders (user_id, status, creation_date) " +
+            "VALUES (:#{order.userId}, :#{order.status}, NOW())", nativeQuery = true)
     public void create(@Param("order") Order order);
 
     @Query(value = "SELECT o FROM Order o WHERE o.id IN :ids")
@@ -25,11 +25,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     public Optional<Order> findByOrderId(@Param("id") Long orderId);
 
     @Query(value = "SELECT o FROM Order o WHERE o.status IN :statuses")
-    public List<Order> findByStatuses(@Param("statuses") List<Status> statuses);
+    public List<Order> findByStatuses(@Param("statuses") List<String> statuses);
 
     @Modifying
-    @Query(value = "UPDATE orders SET orders.status = :#{order.status} " +
-            "WHERE orders.id = :id", nativeQuery = true)
+    @Query(value = "UPDATE orders SET status = :#{order.status} " +
+            "WHERE id = :id", nativeQuery = true)
     public void updateOrder(@Param("id") Long orderId, @Param("order") Order order);
 
     @Modifying

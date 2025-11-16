@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import rainchik.orderservice.annotation.ValidStatusValue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
 public class OrderResponseDTO {
 
     private Long id;
+
 
     private Long userId;
 
@@ -22,5 +24,7 @@ public class OrderResponseDTO {
 
     @PastOrPresent
     private LocalDateTime time;
+
+    private List<OrderItemResponseDTO> orderItems;
 
 }
