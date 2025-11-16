@@ -1,11 +1,13 @@
 package rainchik.orderservice.service.impl;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
 import rainchik.orderservice.dto.UserResponseDTO;
+import rainchik.orderservice.exception.UserServiceNotAvailableException;
 import rainchik.orderservice.service.UserService;
 
 import java.util.Map;
@@ -21,6 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CircuitBreaker(name = "getUserByEmail", fallbackMethod = "fallbackGetUserByEmail")
     public UserResponseDTO getUserByEmail(String email) {
         Map<String, Object> map = restClient.get()
                 .uri("/email/{email}", email)
@@ -37,5 +40,9 @@ public class UserServiceImpl implements UserService {
         dto.setId((Long) map.get("id"));
 
         return dto;
+    }
+
+    public void fallbackGetUserByEmail(Throwable throwable) throws UserServiceNotAvailableException {
+        throw new UserServiceNotAvailableException();
     }
 }
