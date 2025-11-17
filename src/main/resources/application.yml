@@ -1,6 +1,10 @@
 spring:
   application:
     name: orderservice
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
 
 user-service:
   base-url: http://localhost:8080/user

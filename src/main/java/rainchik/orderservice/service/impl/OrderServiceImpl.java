@@ -62,7 +62,8 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderResponseDTO updateOrder(Long orderId, OrderDTO order) throws OrderDoesNotExistException {
         if(orderRepository.existsById(orderId)) {
-            orderRepository.updateOrder(orderId, orderMapper.toOrder(order));
+            UserResponseDTO userResponseDTO = userService.getUserByEmail(order.getUserEmail());
+            orderRepository.updateOrder(orderId, userResponseDTO.getId() , orderMapper.toOrder(order).getStatus());
             return orderMapper.toOrderResponseDTO(orderRepository.findById(orderId).get());
         }
         else {

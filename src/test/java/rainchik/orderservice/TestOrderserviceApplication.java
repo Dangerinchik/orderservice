@@ -1,6 +1,7 @@
 package rainchik.orderservice;
 
 import org.springframework.boot.SpringApplication;
+import rainchik.orderservice.config.TestcontainersConfiguration;
 
 public class TestOrderserviceApplication {
 
