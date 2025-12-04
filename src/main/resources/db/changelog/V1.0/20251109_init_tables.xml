@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-orders-table" author="Danila">
+        <createTable tableName="orders">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints foreignKeyName="fk_order_users"
+                             referencedTableName="users" referencedColumnNames="id"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-orders-index" author="Danila">
+        <createIndex tableName="orders" indexName="idx_orders_status">
+            <column name="status"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="create-items-table" author="Danila">
+        <createTable tableName="items">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-items-index" author="Danila">
+        <createIndex tableName="items" indexName="idx_items_name">
+            <column name="name"/>
+        </createIndex>
+        <createIndex tableName="items" indexName="idx_items_price">
+            <column name="price"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="create-order_items-table" author="Danila">
+        <createTable tableName="order_items">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="bigint">
+                <constraints foreignKeyName="fk_order_item_orders"
+                             referencedTableName="orders" referencedColumnNames="id"/>
+            </column>
+            <column name="item_id" type="bigint">
+                <constraints foreignKeyName="fk_order_item_items"
+                             referencedTableName="items" referencedColumnNames="id"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false" checkConstraint="quantity > 0"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-order_items-index" author="Danila">
+        <createIndex tableName="order_items" indexName="idx_order_items_order_item_id">
+            <column name="order_id"/>
+            <column name="item_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
