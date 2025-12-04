@@ -2,6 +2,7 @@ package rainchik.orderservice.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import rainchik.orderservice.dto.OrderServiceErrorResponse;
@@ -66,6 +67,13 @@ public class OrderServiceExceptionHandler {
         String message = String.format("User service not available: %s %s", LocalDateTime.now(), e.getMessage());
         OrderServiceErrorResponse errorResponse = new OrderServiceErrorResponse(message);
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(errorResponse);
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public ResponseEntity<OrderServiceErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+        String message = String.format("Argument not valid: %s %s", LocalDateTime.now(), ex.getMessage());
+        OrderServiceErrorResponse response = new OrderServiceErrorResponse(message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
     @ExceptionHandler({Exception.class})

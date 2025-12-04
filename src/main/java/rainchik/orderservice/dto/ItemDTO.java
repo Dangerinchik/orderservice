@@ -10,7 +10,7 @@ public class ItemDTO {
 
     @NotBlank
     @Size(min = 3, max = 100)
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9\\\\s():]+$")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9\\s():]+$")
     private String name;
 
     @DecimalMin("0")

@@ -28,9 +28,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     public List<Order> findByStatuses(@Param("statuses") List<String> statuses);
 
     @Modifying
-    @Query(value = "UPDATE orders SET status = :#{order.status} " +
+    @Query(value = "UPDATE orders SET user_id = :userId, status = :status " +
             "WHERE id = :id", nativeQuery = true)
-    public void updateOrder(@Param("id") Long orderId, @Param("order") Order order);
+    void updateOrder(@Param("id") Long orderId, @Param("userId") Long userId, @Param("status") String status);
 
     @Modifying
     @Query(value = "DELETE FROM Order o WHERE o.id = :id")
