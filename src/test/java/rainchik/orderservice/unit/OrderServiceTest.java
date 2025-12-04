@@ -54,6 +54,7 @@ public class OrderServiceTest {
         order = new Order();
         order.setId(1L);
         order.setUserId(1L);
+        order.setStatus("PENDING");
 
         orderDTO = new OrderDTO();
         orderDTO.setUserEmail("test@example.com");
@@ -113,6 +114,7 @@ public class OrderServiceTest {
         when(orderRepository.existsById(1L)).thenReturn(true);
         when(orderMapper.toOrder(orderDTO)).thenReturn(order);
         when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+        when(userService.getUserByEmail(any())).thenReturn(userResponseDTO);
         when(orderMapper.toOrderResponseDTO(order)).thenReturn(orderResponseDTO);
 
         // Act

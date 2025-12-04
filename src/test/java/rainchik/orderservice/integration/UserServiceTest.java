@@ -23,7 +23,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @TestPropertySource(properties = {
-        "user-service.base-url=http://localhost:8081/user"
+        "user-service.base-url=http://localhost:8081"
 })
 public class UserServiceTest {
 
