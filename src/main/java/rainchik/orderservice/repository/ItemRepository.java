@@ -6,7 +6,5 @@ import rainchik.orderservice.entity.Item;
 import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
-    public List<Item> findByName(String name);
-
+    
 }

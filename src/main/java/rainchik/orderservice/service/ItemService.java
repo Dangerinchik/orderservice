@@ -13,8 +13,6 @@ public interface ItemService {
 
     public ItemResponseDTO getItemById(Long id) throws ItemDoesNotExistException;
     public Item getItemByIdForService(Long id) throws ItemDoesNotExistException;
-    public List<ItemResponseDTO> getItemsByName(String name) throws ListOfItemsFoundedByNameIsEmpty;
-    public List<ItemResponseDTO> getItems() throws ListOfItemsIsEmpty;
     public ItemResponseDTO updateItem(Long itemId, ItemDTO itemDTO) throws ItemDoesNotExistException;
     public ItemResponseDTO createItem(ItemDTO itemDTO);
     public String deleteItem(Long itemId) throws ItemDoesNotExistException;

@@ -30,16 +30,6 @@ public class ItemController {
         return ResponseEntity.ok(itemService.getItemById(id));
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<List<ItemResponseDTO>> getItemByName(@PathVariable String name) throws ItemDoesNotExistException, ListOfItemsFoundedByNameIsEmpty {
-        return ResponseEntity.ok(itemService.getItemsByName(name));
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<ItemResponseDTO>> getAllItems() throws ListOfItemsIsEmpty {
-        return ResponseEntity.ok(itemService.getItems());
-    }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<ItemResponseDTO> updateItem(@PathVariable Long id, @Valid @RequestBody ItemDTO dto) throws ItemDoesNotExistException {
         return ResponseEntity.ok(itemService.updateItem(id, dto));

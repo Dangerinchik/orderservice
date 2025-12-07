@@ -52,34 +52,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemResponseDTO> getItemsByName(String name) throws ListOfItemsFoundedByNameIsEmpty {
-        List<Item> items = itemRepository.findByName(name);
-        List<ItemResponseDTO> responseList = new ArrayList<>();
-        if(items.isEmpty()){
-            throw new ListOfItemsFoundedByNameIsEmpty(name);
-        }
-        for (Item item : items) {
-            responseList.add(itemMapper.toItemResponseDTO(item));
-        }
-        return responseList;
-    }
-
-    @Override
-    public List<ItemResponseDTO> getItems() throws ListOfItemsIsEmpty {
-        List<Item> items = itemRepository.findAll();
-        List<ItemResponseDTO> responseList = new ArrayList<>();
-        if(items.isEmpty()){
-            throw new ListOfItemsIsEmpty();
-        }
-        else{
-            for (Item item : items) {
-                responseList.add(itemMapper.toItemResponseDTO(item));
-            }
-        }
-        return responseList;
-    }
-
-    @Override
     @Transactional
     public ItemResponseDTO updateItem(Long itemId, ItemDTO itemDTO) throws ItemDoesNotExistException {
 
