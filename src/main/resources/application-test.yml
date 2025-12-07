@@ -11,6 +11,9 @@ spring:
         format_sql: true
   liquibase:
     enabled: false
+  kafka:
+    jaas:
+      enabled: false
 
 logging:
   level:
