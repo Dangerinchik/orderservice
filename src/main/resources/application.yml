@@ -11,7 +11,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-
+  kafka:
+    bootstrap-servers: localhost:19092
+    template:
+      default-topic: create-order-topic
 
 user-service:
   base-url: http://localhost:8080/user

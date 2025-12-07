@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.core.KafkaTemplate;
 import rainchik.orderservice.dto.*;
 import rainchik.orderservice.entity.Item;
 import rainchik.orderservice.entity.Order;
@@ -34,6 +35,7 @@ public class OrderServiceTest {
     private UserService userService;
     private ItemService itemService;
     private OrderServiceImpl orderService;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     private Order order;
     private OrderDTO orderDTO;
@@ -49,7 +51,7 @@ public class OrderServiceTest {
         userService = mock(UserService.class);
         itemService = mock(ItemService.class);
 
-        orderService = new OrderServiceImpl(orderRepository, orderMapper, userService, itemService);
+        orderService = new OrderServiceImpl(orderRepository, orderMapper, userService, itemService, kafkaTemplate);
 
         order = new Order();
         order.setId(1L);

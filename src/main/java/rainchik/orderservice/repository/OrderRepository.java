@@ -33,6 +33,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     void updateOrder(@Param("id") Long orderId, @Param("userId") Long userId, @Param("status") String status);
 
     @Modifying
+    @Query(value = "UPDATE orders SET status = :status " +
+            "WHERE id = :id", nativeQuery = true)
+    void updateOrderStatus(@Param("id") Long orderId, @Param("status") String status);
+
+    @Modifying
     @Query(value = "DELETE FROM Order o WHERE o.id = :id")
     public void deleteOrder(@Param("id") Long orderId);
 
