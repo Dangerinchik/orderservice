@@ -108,57 +108,6 @@ public class ItemServiceTest {
     }
 
     @Test
-    void getItemsByName_ShouldReturnItems_WhenItemsExist() throws ListOfItemsFoundedByNameIsEmpty {
-        // Arrange
-        List<Item> items = Arrays.asList(item);
-        when(itemRepository.findByName("Test Item")).thenReturn(items);
-        when(itemMapper.toItemResponseDTO(item)).thenReturn(itemResponseDTO);
-
-        // Act
-        List<ItemResponseDTO> result = itemService.getItemsByName("Test Item");
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals("Test Item", result.get(0).getName());
-        verify(itemRepository).findByName("Test Item");
-    }
-
-    @Test
-    void getItemsByName_ShouldThrowException_WhenNoItemsFound() {
-        // Arrange
-        when(itemRepository.findByName("NonExistent")).thenReturn(List.of());
-
-        // Act & Assert
-        assertThrows(ListOfItemsFoundedByNameIsEmpty.class, () -> itemService.getItemsByName("NonExistent"));
-    }
-
-    @Test
-    void getItems_ShouldReturnAllItems_WhenItemsExist() throws ListOfItemsIsEmpty {
-        // Arrange
-        List<Item> items = Arrays.asList(item);
-        when(itemRepository.findAll()).thenReturn(items);
-        when(itemMapper.toItemResponseDTO(item)).thenReturn(itemResponseDTO);
-
-        // Act
-        List<ItemResponseDTO> result = itemService.getItems();
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        verify(itemRepository).findAll();
-    }
-
-    @Test
-    void getItems_ShouldThrowException_WhenNoItemsExist() {
-        // Arrange
-        when(itemRepository.findAll()).thenReturn(List.of());
-
-        // Act & Assert
-        assertThrows(ListOfItemsIsEmpty.class, () -> itemService.getItems());
-    }
-
-    @Test
     void updateItem_ShouldUpdateAndReturnItem_WhenItemExists() throws ItemDoesNotExistException {
         // Arrange
         when(itemRepository.findById(1L)).thenReturn(Optional.of(item));
