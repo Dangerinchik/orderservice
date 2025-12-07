@@ -18,5 +18,4 @@ public interface OrderService {
     public List<OrderResponseDTO> getOrdersInList(List<Long> orderIds) throws ListOfOrdersIsEmpty;
     public List<OrderResponseDTO> getOrdersInStatusList(List<String> statuses) throws ListOfOrdersIsEmpty;
 
-
 }
