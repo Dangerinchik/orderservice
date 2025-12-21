@@ -1,0 +1,5 @@
+replicaCount: 2
+
+container:
+  image: dante4/gateway-order-service
+  port: 8083

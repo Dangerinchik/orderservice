@@ -19,6 +19,23 @@ spring:
 user-service:
   base-url: http://localhost:8080/user
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+
+otel:
+  exporter:
+    otlp:
+      endpoint: http://host.docker.internal:4317
+  resource:
+    attributes:
+      service.name: ${spring.application.name}
+
 resilience4j:
   circuitbreaker:
     instances:
