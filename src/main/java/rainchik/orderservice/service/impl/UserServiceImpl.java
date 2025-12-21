@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO getUserByEmail(String email) {
         try {
             System.out.println("=== НАЧАЛО getUserByEmail ===");
-            System.out.println("Base URL: " + restClient); // Это покажет какой RestClient используется
+            System.out.println("Base URL: " + restClient);
 
             Map<String, Object> map = restClient.get()
                     .uri("/user/email/{email}", email)
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
             System.out.println("Тип ошибки: " + e.getClass().getName());
             System.out.println("Сообщение: " + e.getMessage());
             e.printStackTrace();
-            throw e; // Пробрасываем дальше для Circuit Breaker
+            throw e;
         }
     }
 
